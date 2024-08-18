@@ -1,0 +1,2 @@
+﻿ldown($_xmouse, $_ymouse)
+waitms(5)

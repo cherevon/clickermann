@@ -1,0 +1,8 @@
+﻿waitms(50)
+keyup(#W)
+keyup(#W)
+ldown($_xmouse, $_ymouse)
+keypress(#W)
+waitms(50)
+keydown(#W)
+wait(1000000)

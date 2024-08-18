@@ -1,0 +1,53 @@
+﻿# Предполагается, что в начале выполнения скрипта игрок стоит на маяке и смотрит вниз на маяк
+
+# Слот, в котором лежит слиток Гайи
+$GAIA_INGOT_SLOT = #6
+# Слот, в котором лежит меч для убийства Гайи
+$GAIA_KILLER_SLOT = #5 
+# Интервал, с которым игрок пытается атаковать Гайю (в миллисекундах)
+$ATTACK_INTERVAL = 10
+# На сколько надо поднять/опустить взгляд, чтобы смотреть сначала на Гайю, а потом снова на маяк 
+$Y_VIEW_MAX = 1000
+
+# Выбрать слиток Гайи
+keydown($GAIA_INGOT_SLOT) 
+waitms(rnd(25, 75))
+keyup($GAIA_INGOT_SLOT)
+waitms(rnd(350, 500))
+
+# Нажать Shift+ПКМ по маяку слитком Гайи
+keydown(#SHIFT)
+waitms(rnd(75, 100))
+rclick($_xmouse, $_ymouse)
+waitms(rnd(75, 100))
+keyup(#SHIFT)
+
+# Повернуть взгляд на Гайю
+for($dy = 0, $dy < $Y_VIEW_MAX, 10)
+    mover(0, -10)
+		waitms(5)   
+end_cyc
+
+# Выбрать меч Убийца Гайи
+keydown($GAIA_KILLER_SLOT) 
+waitms(rnd(25, 75))
+keyup($GAIA_KILLER_SLOT)
+
+# Небольшая пауза для запуска Гайи
+wait(5)
+
+# Машем мечом, чтобы убить Гайю
+$max_time = 2000
+for($kill_timer = 0, $kill_timer < $max_time, $ATTACK_INTERVAL)
+    lclick($_xmouse, $_ymouse)
+		waitms($ATTACK_INTERVAL)   
+end_cyc
+
+# Вернуть взгляд назад на маяк
+for($dy = 0, $dy < $Y_VIEW_MAX, 10)
+    mover(0, 10)
+		waitms(5)   
+end_cyc
+
+# Ожидаем 30 секунд, чтобы прошло кд меча
+wait(30)
